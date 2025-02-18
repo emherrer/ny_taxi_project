@@ -74,9 +74,9 @@ url_template = "https://github.com/DataTalksClub/nyc-tlc-data/releases/download/
 
 user = "root"
 password = "root"
-host = "pgdatabase"  #"localhost"
+host = "destpg"  #"localhost"
 port = "5432"        #"5433"
-db = "ny_taxi"
+db = "dest_db"
 batch_size= 10000
 
 # Tarea 1

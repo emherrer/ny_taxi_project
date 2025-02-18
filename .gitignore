@@ -1,4 +1,5 @@
 google/creds.json
+ny_taxi_pg_data/
 
 # Airflow stuff
 logs/

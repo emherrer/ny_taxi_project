@@ -1,4 +1,3 @@
-
 version: '3.8'
 services:
     postgres:
@@ -13,6 +12,8 @@ services:
             test: ["CMD", "pg_isready", "-U", "airflow"]
             interval: 5s
             retries: 5
+        networks:
+            - airflow_network
 
     init-airflow:
         build: .
@@ -42,7 +43,9 @@ services:
             start_period: 10s
 
         volumes:
-        - shared-data:/opt/airflow/shared            
+        - shared-data:/opt/airflow/shared    
+        networks:
+            - airflow_network        
 
     scheduler:
         build: .
@@ -75,6 +78,8 @@ services:
             - ./logs:/opt/airflow/logs
             - ./google:/opt/airflow/google:ro
             - shared-data:/opt/airflow/shared
+        networks:
+            - airflow_network
 
     webserver:
         build: .
@@ -117,7 +122,13 @@ services:
             interval: 30s
             timeout: 30s
             retries: 3
+        networks:
+            - airflow_network
 
 volumes:
   postgres-db-volume:
   shared-data:
+
+networks:
+    airflow_network:
+        driver: bridge
